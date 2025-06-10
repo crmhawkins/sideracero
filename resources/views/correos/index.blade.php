@@ -53,6 +53,7 @@
                 <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                     <tr>
                         <th class="px-4 py-2">Remitente</th>
+                        <th class="px-4 py-2">Categoria</th>
                         <th class="px-4 py-2">Asunto</th>
                         <th class="px-4 py-2">Recibido</th>
                         <th class="px-4 py-2">Analizado</th>
@@ -63,6 +64,7 @@
                     @forelse ($correos as $correo)
                         <tr class="text-gray-700 dark:text-gray-300">
                             <td class="px-4 py-2">{{ $correo->remitente }}</td>
+                            <td class="px-4 py-2">{{ $correo->categoria }}</td>
                             <td class="px-4 py-2">{{ $correo->asunto }}</td>
                             <td class="px-4 py-2">{{ $correo->created_at->format('d/m/Y H:i') }}</td>
                             <td class="px-4 py-2">
