@@ -29,6 +29,11 @@ class AnalizarCorreos extends Command
         foreach ($correos as $correo) {
             $this->info("Analizando: " . $correo->asunto);
 
+
+            $fechaHoy = now()->locale('es')->isoFormat('dddd D [de] MMMM [de] YYYY');
+            $diaSemanaHoy = now()->locale('es')->isoFormat('dddd');
+            $diaSemanaManiana = now()->addDay()->locale('es')->isoFormat('dddd');
+
             $prompt = <<<EOT
             Hoy es $diaSemanaHoy, $fechaHoy. Mañana es $diaSemanaManiana.
             Eres un asistente profesional de atención al cliente para una empresa especializada en productos metálicos industriales, especialmente tubos de acero al carbono sin costura.
