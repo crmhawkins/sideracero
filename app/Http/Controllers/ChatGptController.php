@@ -352,6 +352,6 @@ class ChatGptController extends Controller
             'html' => view('chat._respuesta', compact('chat'))->render()
         ]);
 
-        return redirect()->back();
+        // return redirect()->back();
     }
 }
