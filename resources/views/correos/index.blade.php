@@ -17,7 +17,7 @@
                 </thead>
                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse ($correos as $correo)
-                        <tr>
+                        <tr class="text-gray-700 dark:text-gray-300">
                             <td class="px-4 py-2">{{ $correo->remitente }}</td>
                             <td class="px-4 py-2">{{ $correo->asunto }}</td>
                             <td class="px-4 py-2">{{ $correo->created_at->format('d/m/Y H:i') }}</td>
