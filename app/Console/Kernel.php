@@ -13,9 +13,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-    $schedule->command('correos:procesar')->everyFiveMinutes(); // O el intervalo que desees
-    $schedule->command('correos:analizar')->everyFiveMinutes(); // O el intervalo que desees
-    $schedule->command('correos:responder')->everyFiveMinutes(); // O el intervalo que desees
+    $schedule->command('correos:procesar')->everyMinute(); // O el intervalo que desees
+    $schedule->command('correos:analizar')->everyMinute(); // O el intervalo que desees
+    $schedule->command('correos:responder')->everyMinute(); // O el intervalo que desees
 
     }
 

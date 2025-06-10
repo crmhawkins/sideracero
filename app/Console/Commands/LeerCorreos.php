@@ -37,7 +37,9 @@ class LeerCorreos extends Command
                 $correo->leido = false;
 
                 $correo->save();
-
+                // ✅ Marcar como leído
+                $message->setFlag('Seen');
+                
                 $this->info("Correo guardado: " . $correo->asunto);
             }
 
