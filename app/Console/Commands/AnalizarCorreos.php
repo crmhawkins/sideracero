@@ -134,9 +134,9 @@ class AnalizarCorreos extends Command
 
 
             Siempre responde con un JSON válido con estas claves:
-            - categoria: tipo de consulta (por ejemplo: "Solicitud de presupuesto", "Consulta técnica", etc.)
-            - productos: lista de productos encontrados del catálogo (puedes usar la función obtener_productos). Puede estar vacía si no se encuentra ninguno.
-            - respuesta: respuesta final al cliente, redactada con lenguaje claro, profesional y directo.
+            - categoria: tipo de consulta (por ejemplo: "Solicitud de presupuesto", "Consulta técnica", etc.) Ciñete a las categorías válidas que puedes obtener con la función obtener_categorias.
+            - productos: lista de productos encontrados del catálogo (puedes usar la función obtener_productos). Puede estar vacía si no se encuentra ninguno. Ciñete a los productos que puedes obtener con la función obtener_productos.
+            - respuesta: respuesta final al cliente, redactada con lenguaje claro, profesional y muy cordial.
 
             ⚠️ Al realizar cálculos de precios:
             - Usa solo el campo "Precio venta" (precio unitario por metro).
