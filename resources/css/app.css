@@ -1,8 +1,18 @@
+/* Para asegurarnos de que todas las propiedades y métodos de Tailwind CSS se carguen correctamente, debemos asegurarnos de que las directivas de Tailwind estén correctamente configuradas. Aquí están las importaciones necesarias: */
+
+/* Importaciones de Tailwind CSS */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Asegúrate de que estas importaciones estén al principio del archivo CSS para que Tailwind pueda procesar y aplicar sus estilos correctamente. */
+/*
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
+@import "tailwindcss";
+@source "../views"; */
 
 #toast-container {
     display: flex;
