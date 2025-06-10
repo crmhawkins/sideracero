@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+#toast-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1060;
+}
+
+.swal2-container.swal2-top-end {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+}
+
+.toast-popup {
+    border-radius: 10px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    padding: 15px 20px !important;
+    font-size: 14px !important;
+    width: 300px !important;
+    animation-duration: 0.5s;
+}
+
+.toast-button {
+    padding: 4px 10px !important;
+    font-size: 12px !important;
+    background-color: #2563eb !important;
+    color: white !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+}
+
+.swal2-animate__fadeInRight {
+    animation: fadeInRight 0.4s ease-out;
+}
+.swal2-animate__fadeOutRight {
+    animation: fadeOutRight 0.4s ease-in;
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeOutRight {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(100%); }
+}
