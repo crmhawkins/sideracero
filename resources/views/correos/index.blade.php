@@ -1,4 +1,17 @@
 <x-app-layout>
+    <style>
+@media (min-width: 640px) {
+        .grid-cols-1 {
+        grid-template-columns: repeat(4, minmax(0, 4fr));
+    }
+}
+@media (max-width: 639px) {
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+    </style>
     <x-slot name="header">
         <h2 class="text-xl font-semibold text-gray-800 dark:text-white leading-tight">📧 Correos Entrantes</h2>
     </x-slot>
@@ -48,7 +61,7 @@
                     @endif
                 </div>
             </form>
-
+            <div class="overflow-x-auto">
             <table class="min-w-full text-sm text-left">
                 <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                     <tr>
