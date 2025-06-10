@@ -1,7 +1,13 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-Bp7TMlvl.css",
+    "file": "assets/app-cppPb4LT.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/alertas.js": {
+    "file": "assets/alertas-B0_JlhrR.js",
+    "name": "alertas",
+    "src": "resources/js/alertas.js",
     "isEntry": true
   },
   "resources/js/app.js": {
