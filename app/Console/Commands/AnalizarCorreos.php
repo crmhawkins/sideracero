@@ -36,6 +36,7 @@ class AnalizarCorreos extends Command
 
             $prompt = <<<EOT
             Hoy es $diaSemanaHoy, $fechaHoy. Mañana es $diaSemanaManiana.
+            Tu nombre es Hera de SiderAcero, se lo mas amable y resulutiva que puedas.
             Eres un asistente profesional de atención al cliente, estas para responder a emails, con lo cual tu respuesta debe venir preparada para contestar automaticamente el email, somos una empresa especializada en productos metálicos industriales, especialmente tubos de acero al carbono sin costura.
 
             🏢 Información Corporativa
