@@ -131,8 +131,8 @@ class AnalizarCorreos extends Command
                 [
                     "type" => "function",
                     "function" => [
-                        "name" => "obtener_productos",
-                        "description" => "Devuelve una lista de productos de nuestro catálogo",
+                        "name" => "obtener_rutas_destinos",
+                        "description" => "Devuelve una lista de rutas y destinos disponibles de ferry",
                         "parameters" => [
                             "type" => "object",
                             "properties" => new \stdClass()
@@ -142,8 +142,8 @@ class AnalizarCorreos extends Command
                 [
                     "type" => "function",
                     "function" => [
-                        "name" => "obtener_categorias",
-                        "description" => "Devuelve una lista de categorías válidas para clasificar los correos",
+                        "name" => "obtener_precios_tarifas",
+                        "description" => "Devuelve precios y tarifas de billetes de ferry",
                         "parameters" => [
                             "type" => "object",
                             "properties" => new \stdClass()
@@ -178,10 +178,8 @@ class AnalizarCorreos extends Command
                 $toolCallId = $toolCall['id'];
 
                 $simulatedToolResponse = match ($toolName) {
-                    'obtener_productos' => Storage::get('openai/productos.json'),
-                    'obtener_categorias' => json_encode([
-                        "Solicitud de presupuesto", "Consulta técnica", "Petición de información", "Incidencia postventa", "Otro"
-                    ]),
+                    'obtener_rutas_destinos' => Storage::get('openai/rutas_destinos.json'),
+                    'obtener_precios_tarifas' => Storage::get('openai/precios_tarifas.json'),
                     default => null,
                 };
 
