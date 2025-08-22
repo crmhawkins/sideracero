@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ChatGpt;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use App\Services\OpenAiToolsService;
 
 class ChatGptController extends Controller
 {
@@ -132,10 +133,23 @@ class ChatGptController extends Controller
                 "type" => "function",
                 "function" => [
                     "name" => "obtener_rutas_destinos",
-                    "description" => "Devuelve una lista de rutas y destinos disponibles de ferry",
+                    "description" => "Devuelve información completa sobre rutas marítimas, puertos de origen, destinos disponibles, navieras, duraciones y frecuencias de ferry",
                     "parameters" => [
                         "type" => "object",
-                        "properties" => new \stdClass()
+                        "properties" => [
+                            "origen" => [
+                                "type" => "string",
+                                "description" => "Código del puerto de origen (ej: ALG, BCN, VLC, etc.) o 'todos' para obtener todas las rutas"
+                            ],
+                            "destino" => [
+                                "type" => "string", 
+                                "description" => "Código del puerto de destino (ej: CEU, PMI, TCI, etc.) o 'todos' para obtener todos los destinos"
+                            ],
+                            "naviera" => [
+                                "type" => "string",
+                                "description" => "Nombre de la naviera específica (ej: Baleària, FRS, Armas/Trasmediterranea) o 'todas' para todas las navieras"
+                            ]
+                        ]
                     ]
                 ]
             ],
@@ -143,10 +157,23 @@ class ChatGptController extends Controller
                 "type" => "function",
                 "function" => [
                     "name" => "obtener_precios_tarifas",
-                    "description" => "Devuelve precios y tarifas de billetes de ferry",
+                    "description" => "Devuelve precios y tarifas de billetes de ferry con advertencia de que los precios pueden cambiar hasta el pago",
                     "parameters" => [
                         "type" => "object",
-                        "properties" => new \stdClass()
+                        "properties" => [
+                            "origen" => [
+                                "type" => "string",
+                                "description" => "Código del puerto de origen (ej: ALG, BCN, VLC, etc.)"
+                            ],
+                            "destino" => [
+                                "type" => "string",
+                                "description" => "Código del puerto de destino (ej: CEU, PMI, TCI, etc.)"
+                            ],
+                            "tipo" => [
+                                "type" => "string",
+                                "description" => "Tipo de tarifa (ej: pasajero_ida, vehiculo_pequeño_ida, mascota, etc.)"
+                            ]
+                        ]
                     ]
                 ]
             ]
@@ -201,8 +228,8 @@ class ChatGptController extends Controller
             $toolCallId = $toolCall['id'];
 
             $simulatedToolResponse = match ($toolName) {
-                'obtener_rutas_destinos' => Storage::get('openai/rutas_destinos.json'),
-                'obtener_precios_tarifas' => Storage::get('openai/precios_tarifas.json'),
+                'obtener_rutas_destinos' => $this->procesarRutasDestinos($toolCall['function']['arguments'] ?? '{}'),
+                'obtener_precios_tarifas' => $this->procesarPreciosTarifas($toolCall['function']['arguments'] ?? '{}'),
                 default => null,
             };
 
@@ -326,5 +353,45 @@ class ChatGptController extends Controller
         ]);
 
         // return redirect()->back();
+    }
+
+    /**
+     * Procesa las consultas de rutas y destinos con filtros
+     */
+    private function procesarRutasDestinos($arguments)
+    {
+        $params = json_decode($arguments, true);
+        
+        if (!$params) {
+            return OpenAiToolsService::obtenerRutasDestinos();
+        }
+
+        $origen = $params['origen'] ?? null;
+        $destino = $params['destino'] ?? null;
+        $naviera = $params['naviera'] ?? null;
+
+        return OpenAiToolsService::obtenerRutasDestinos($origen, $destino, $naviera);
+    }
+
+    /**
+     * Procesa las consultas de precios y tarifas con filtros
+     */
+    private function procesarPreciosTarifas($arguments)
+    {
+        $params = json_decode($arguments, true);
+        
+        if (!$params) {
+            return OpenAiToolsService::obtenerPreciosTarifas();
+        }
+
+        $origen = $params['origen'] ?? null;
+        $destino = $params['destino'] ?? null;
+        $tipo = $params['tipo'] ?? null;
+
+        if ($origen && $destino) {
+            return OpenAiToolsService::obtenerPreciosRuta($origen, $destino, $tipo);
+        }
+
+        return OpenAiToolsService::obtenerPreciosTarifas();
     }
 }
